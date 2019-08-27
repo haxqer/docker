@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  owncloud:
+    image: owncloud
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    volumes:
+      - home_data:/var/jira
+    networks:
+      - network-bridge
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-owncloud
+    environment:
+      - TZ='Asia/Shanghai'
+      - MYSQL_DATABASE=owncloud
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_USER=owncloud
+      - MYSQL_PASSWORD=123123
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+    ports:
+      - "13307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    networks:
+      - network-bridge
+
+networks:
+  network-bridge:
+    driver: bridge
+
+volumes:
+  home_data:
+    external: false
+  mysql_data:
+    external: false
