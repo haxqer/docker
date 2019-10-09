@@ -70,11 +70,11 @@ Run curl -sS https://getcomposer.org/installer | php \
     && echo "${TIMEZONE}" > /etc/timezone \
     && echo "[Date]\ndate.timezone=${TIMEZONE}" > /usr/local/etc/php/conf.d/timezone.ini
 
-# Install composer deps
-ADD . /var/www/swoft
-RUN  cd /var/www/swoft \
-    && composer install \
-    && composer clearcache
-
-WORKDIR /var/www/swoft
-EXPOSE 18306 18307 18308
+## Install composer deps
+#ADD . /var/www/swoft
+#RUN  cd /var/www/swoft \
+#    && composer install \
+#    && composer clearcache
+#
+#WORKDIR /var/www/swoft
+#EXPOSE 18306 18307 18308
