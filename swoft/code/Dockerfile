@@ -15,7 +15,7 @@ ENV SWOFT_HOME="/var/www/swoft" \
     SWOFT_VERSION="v2.0.6"
 
 RUN mkdir -p ${SWOFT_HOME} \
-    && curl -o /tmp/swoft.tar.gz https://github.com/swoft-cloud/swoft/archive/${SWOFT_VERSION}.tar.gz -L \
+    && curl -o /tmp/swoft.tar.gz https://github.com/haxqer/swoft/archive/bas-${SWOFT_VERSION}.tar.gz -L \
     && tar xzf /tmp/swoft.tar.gz -C ${SWOFT_HOME}/ --strip-components 1 \
     && rm -f /tmp/swoft.tar.gz \
     && cd ${SWOFT_HOME} \
