@@ -11,7 +11,7 @@
 #
 FROM haxqer/swoft:code
 
-ENV VERSION="v0.1.1"
+ENV VERSION="v0.1.3"
 
 RUN curl -o /tmp/swoftcli.phar https://github.com/swoft-cloud/swoft-cli/releases/download/${VERSION}/swoftcli.phar -L \
     && mv /tmp/swoftcli.phar /usr/local/bin/swoftcli \
