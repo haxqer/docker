@@ -14,7 +14,7 @@ FROM haxqer/swoft:base
 ENV SWOFT_HOME="/var/www/swoft" 
 
 RUN mkdir -p ${SWOFT_HOME} \
-    && curl -o ${SWOFT_HOME}/composer.json https://raw.githubusercontent.com/haxqer/swoft/master/composer.json \
+    && curl -o ${SWOFT_HOME}/composer.json https://raw.githubusercontent.com/haxqer/swoft/master/composer.json -L \
     && cd ${SWOFT_HOME} \
     && composer install \
     && composer clearcache
