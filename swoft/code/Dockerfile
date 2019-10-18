@@ -12,13 +12,10 @@
 FROM haxqer/swoft:base
 
 ENV SWOFT_HOME="/var/www/swoft" \
-    SWOFT_VERSION="v2.0.6.2"
+    SWOFT_VERSION="v2.0.6.3"
 
 RUN mkdir -p ${SWOFT_HOME} \
-    && curl -o /tmp/swoft.tar.gz https://github.com/haxqer/swoft/archive/bas-${SWOFT_VERSION}.tar.gz -L \
-    && tar xzf /tmp/swoft.tar.gz -C ${SWOFT_HOME}/ --strip-components 1 \
-    && rm -f /tmp/swoft.tar.gz \
-    && cd ${SWOFT_HOME} \
+    && curl -o ./composer.json https://raw.githubusercontent.com/haxqer/swoft/master/composer.json \
     && composer install \
     && composer clearcache
 
