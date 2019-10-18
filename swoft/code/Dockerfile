@@ -11,8 +11,7 @@
 #
 FROM haxqer/swoft:base
 
-ENV SWOFT_HOME="/var/www/swoft" \
-    SWOFT_VERSION="v2.0.6.4"
+ENV SWOFT_HOME="/var/www/swoft" 
 
 RUN mkdir -p ${SWOFT_HOME} \
     && curl -o ./composer.json https://raw.githubusercontent.com/haxqer/swoft/master/composer.json \
