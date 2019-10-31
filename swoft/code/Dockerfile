@@ -20,5 +20,5 @@ RUN mkdir -p ${SWOFT_HOME} \
     && composer clearcache
 
 WORKDIR ${SWOFT_HOME}
-EXPOSE 18306 18307 18308
+#EXPOSE 18306 18307 18308
 
