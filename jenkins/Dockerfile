@@ -52,6 +52,12 @@ ENV JENKINS_VERSION ${JENKINS_VERSION:-2.202}
 # Can be used to customize where jenkins.war get downloaded from
 ARG JENKINS_URL=https://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war
 
+RUN apt-get update \
+    && apt-get install -y \
+        curl wget git zip unzip less vim procps lsof tcpdump htop openssl
+
+
+
 RUN curl -fsSL ${JENKINS_URL} -o /usr/share/jenkins/jenkins.war
 
 ENV JENKINS_UC https://updates.jenkins.io
