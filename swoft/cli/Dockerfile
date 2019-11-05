@@ -17,9 +17,12 @@ RUN curl -o /tmp/swoftcli.phar https://github.com/swoft-cloud/swoft-cli/releases
     && mv /tmp/swoftcli.phar /usr/local/bin/swoftcli \
     && chmod a+x /usr/local/bin/swoftcli
 
+# install zsh
 RUN apt-get install -y zsh \
     && sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 RUN echo "PROMPT='%#docker \${ret_status} %{\$fg[cyan]%}%c%{\$reset_color%} \$(git_prompt_info)'" >> /root/.zshrc
 
+# install common tools
+RUN apt install -y iputils-ping
 
