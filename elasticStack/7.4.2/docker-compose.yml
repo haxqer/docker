@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   es742:
-    image: elasticsearch:7.4.2
+    image: haxqer/es:7.4.2
     container_name: es742
     ulimits:
       memlock:
@@ -33,7 +33,7 @@ services:
       - elknet
 
   logstash742:
-    image: logstash:7.4.2
+    image: haxqer/logstash:7.4.2
     container_name: logstash742
     depends_on:
       - es742
@@ -42,7 +42,6 @@ services:
       ELASTICSEARCH_HOSTS: http://es742:9200
     volumes:
       - ./pipeline/:/usr/share/logstash/pipeline/
-      - ./lib/mysql-connector-java-8.0.18.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.18.jar
     networks:
       - elknet
 
