@@ -13,11 +13,8 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
-    ports:
-      - 9200:9200
-      - 9300:9300
     volumes:
-      - esdata01:/usr/share/elasticsearch/data
+      - data-es742-001:/usr/share/elasticsearch/data
     networks:
       - elknet
 
@@ -25,11 +22,11 @@ services:
     image: kibana:7.4.2
     depends_on:
       - es742-001
-    ports:
-      - 5601:5601
     environment:
       SERVER_HOST: "0.0.0.0"
       ELASTICSEARCH_HOSTS: http://es742-001:9200
+    volumes:
+      - data-kibana742-001:/usr/share/kibana/data
     networks:
       - elknet
 
@@ -37,6 +34,12 @@ services:
     image: logstash:7.4.2
     depends_on:
       - es742-001
+    environment:
+      TZ: "Asia/Shanghai"
+      ELASTICSEARCH_HOSTS: http://es742-001:9200
+    volumes:
+      - ./pipeline/:/usr/share/logstash/pipeline/
+      - ./lib/mysql-connector-java-8.0.18.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.18.jar
     networks:
       - elknet
 
@@ -46,6 +49,10 @@ networks:
     driver: bridge
     name: elknet
 
+
 volumes:
-  esdata01:
+  data-kibana742-001:
     driver: local
+  data-es742-001:
+    driver: local
+
