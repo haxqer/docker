@@ -1,42 +1,45 @@
-version: '3.4'
+version: '3.7'
 
 services:
 
-  es742-001:
+  es742:
     image: elasticsearch:7.4.2
+    container_name: es742
     ulimits:
       memlock:
         soft: -1
         hard: -1
     environment:
-      - node.name=es742-001
+      - node.name=es742
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
     volumes:
-      - data-es742-001:/usr/share/elasticsearch/data
+      - data-es742:/usr/share/elasticsearch/data
     networks:
       - elknet
 
   kibana742:
     image: kibana:7.4.2
+    container_name: kibana742
     depends_on:
-      - es742-001
+      - es742
     environment:
       SERVER_HOST: "0.0.0.0"
-      ELASTICSEARCH_HOSTS: http://es742-001:9200
+      ELASTICSEARCH_HOSTS: http://es742:9200
     volumes:
-      - data-kibana742-001:/usr/share/kibana/data
+      - data-kibana742:/usr/share/kibana/data
     networks:
       - elknet
 
   logstash742:
     image: logstash:7.4.2
+    container_name: logstash742
     depends_on:
-      - es742-001
+      - es742
     environment:
       TZ: "Asia/Shanghai"
-      ELASTICSEARCH_HOSTS: http://es742-001:9200
+      ELASTICSEARCH_HOSTS: http://es742:9200
     volumes:
       - ./pipeline/:/usr/share/logstash/pipeline/
       - ./lib/mysql-connector-java-8.0.18.jar:/usr/share/logstash/logstash-core/lib/jars/mysql-connector-java-8.0.18.jar
@@ -51,8 +54,8 @@ networks:
 
 
 volumes:
-  data-kibana742-001:
+  data-kibana742:
     driver: local
-  data-es742-001:
+  data-es742:
     driver: local
 
