@@ -11,6 +11,6 @@ RUN apt-get update \
     && apt-get clean \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
 
-RUN curl -o /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/haxqer/docker/master/nginx/yml/default.conf -L
+RUN curl -k -o /etc/nginx/conf.d/default.conf http://raw.githubusercontent.com/haxqer/docker/master/nginx/yml/default.conf -L
 
 
